@@ -1,4 +1,3 @@
-# NOTE: Search + Replace example.com with your own Cloudflared domain before enabling
 tunnel: homelab
 credentials-file: /etc/cloudflared/credentials/credentials.json
 metrics: 0.0.0.0:2000
