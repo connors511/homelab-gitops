@@ -1,23 +1,87 @@
+# Configures ArgoCD to automatically sync all resources in the platform-applications directory
+# as well as all sub-directories of the applications directory.
+
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: argocd
+spec:
+  description: Resources required for the platform.
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "*"
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: platform
   namespace: argocd
-  annotations:
-    # ArgoCD will already be synced after bootstrap and seems to get stuck in "Progressing" state
-    # while the other apps are busy installing even if it's otherwise fully healthy.
-    argocd.argoproj.io/sync-wave: "10"
 spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: argocd
-  sources:
-    - path: argocd/install/argocd
-      repoURL: https://github.com/connors511/homelab-gitops.git
-#    - path: platform/argocd-monitoring
-#      repoURL: https://github.com/<your-github-user>/<your-repo-name>.git
+  project: default
+  source:
+    path: platform-applications
+    repoURL: https://github.com/<your-github-user>/<your-repo-name>.git
   syncPolicy:
     automated:
       allowEmpty: true
       prune: true
+      selfHeal: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: applications
+  namespace: argocd
+spec:
+  description: Applications running on top of the platform.
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "*"
+#---
+#apiVersion: argoproj.io/v1alpha1
+#kind: ApplicationSet
+#metadata:
+#  name: applications
+#  namespace: argocd
+#spec:
+#  generators:
+#    - git:
+#        repoURL: https://github.com/<your-github-user>/<your-repo-name>.git
+#        revision: HEAD
+#        directories:
+#          - path: applications/*
+#  template:
+#    metadata:
+#      name: "{{path.basename}}"
+#    spec:
+#      project: applications
+#      syncPolicy:
+#        automated:
+#          allowEmpty: true
+#          prune: true
+#      source:
+#        repoURL: https://github.com/<your-github-user>/<your-repo-name>.git
+#        path: "{{path}}"
+#      destination:
+#        server: https://kubernetes.default.svc
+#        namespace: default

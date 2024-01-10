@@ -1,19 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloudflared
+  name: cilium
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
-  project: devops
+  project: platform
   source:
-    path: argocd/install/cloudflared
+    path: platform/cilium
     repoURL: https://github.com/connors511/homelab-gitops.git
   syncPolicy:
     automated:
       allowEmpty: true
-      prune: true
+      prune: false

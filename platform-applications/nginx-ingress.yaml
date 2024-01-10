@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  project: devops
+  source:
+    helm:
+      version: v3
+      parameters:
+        - name: ingress-nginx.controller.extraArgs.enable-ssl-passthrough
+          value: ""
+        - name: ingress-nginx.controller.admissionWebhooks.enabled
+          value: "false"
+    path: platform/ingress-nginx
+    repoURL: https://github.com/connors511/homelab-gitops.git
+    targetRevision: HEAD
+  destination:
+    namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

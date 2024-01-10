@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    # ArgoCD will already be synced after bootstrap and seems to get stuck in "Progressing" state
+    # while the other apps are busy installing even if it's otherwise fully healthy.
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: platform
+  sources:
+    - path: platform/argocd
+      repoURL: https://github.com/connors511/homelab-gitops.git
+    - path: platform/argocd-monitoring
+      repoURL: https://github.com/connors511/homelab-gitops.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
