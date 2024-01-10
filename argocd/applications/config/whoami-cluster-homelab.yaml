@@ -1,0 +1,13 @@
+whoami:
+  replicaCount: 2
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    hosts:
+      - host: whoami.mlad.dk
+        paths:
+          - "/"
+    pathType: Prefix

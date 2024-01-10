@@ -1,0 +1,9 @@
+age.agekey
+.idea
+.terraform*
+kubeconfig
+*.tfstate*
+*.tfvars
+.idea
+argocd/install/**/charts
+argocd/applications/charts/**/charts
