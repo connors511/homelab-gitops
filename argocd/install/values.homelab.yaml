@@ -3,9 +3,6 @@ argo-cd:
     params:
       server.insecure: true
     cm:
-      # Reference: https://docs.crossplane.io/v1.10/guides/argo-cd-crossplane/#configuring-argo-cd-with-crossplane
-      application.resourceTrackingMethod: annotations
-
       timeout.reconciliation: 30s
       url: https://argocd.mlad.dk
 
