@@ -11,7 +11,7 @@ spec:
     namespace: default
   project: devops
   source:
-    path: platform/cloudflared
+    path: argocd/install/cloudflared
     repoURL: https://github.com/connors511/homelab-gitops.git
   syncPolicy:
     automated:
