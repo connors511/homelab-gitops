@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: cloudflared
 data:
-  {{ (.Files.Glob "config.yaml").AsConfig | indent 2 }}
+  config.yaml: |
+{{ .Values.config | indent 4 }}
