@@ -60,8 +60,8 @@ argo-cd:
         - "/"
       pathType: Prefix
 
-dex:
-  enabled: false
+  dex:
+    enabled: false
   ## If Google SSO
   # dex:
   #   volumes:
