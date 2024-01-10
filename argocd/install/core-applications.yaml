@@ -70,7 +70,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-ingress-nginx
+  name: ingress-nginx
   namespace: argocd
 spec:
   project: argocd
