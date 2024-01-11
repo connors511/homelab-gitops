@@ -7,9 +7,9 @@ spec:
   project: applications
   source:
     chart: whoami
-#    repoURL: https://cowboysysop.github.io/charts/
-    repoURL: https://github.com/cowboysysop/charts/tree/master/charts/whoami
-    targetRevision: '>=5.*.*'
+    repoURL: https://cowboysysop.github.io/charts/
+#    repoURL: https://github.com/cowboysysop/charts/tree/master/charts/whoami
+    targetRevision: 'latest'
     helm:
       valuesObject:
         replicaCount: 2
