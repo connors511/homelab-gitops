@@ -13,4 +13,5 @@ helmCharts:
         hosts:
           - host: whoami.mlad.dk
             paths:
-              - "/"
+              - path: "/"
+                pathType: Prefix
