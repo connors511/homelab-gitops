@@ -2,7 +2,6 @@ helmCharts:
   - name: podinfo
     repo: https://stefanprodan.github.io/podinfo
     releaseName: podinfo
-    version: '>=5.*.*'
     valuesInline:
       replicaCount: 2
       ingress:
