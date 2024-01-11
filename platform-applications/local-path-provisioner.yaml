@@ -1,18 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: longhorn
+  name: local-path-provisioner
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   destination:
     server: https://kubernetes.default.svc
   project: platform
   source:
-    path: platform/longhorn
+    path: platform/local-path-provisioner
     repoURL: https://github.com/connors511/homelab-gitops.git
   syncPolicy:
     automated:
       allowEmpty: true
-      prune: false
+      prune: true
+    syncOptions:
+      - ServerSideApply=true
