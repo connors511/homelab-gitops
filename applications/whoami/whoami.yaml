@@ -6,7 +6,7 @@ metadata:
 spec:
   project: applications
   source:
-    chart: whoami
+    chart: cowboysysop/whoami
     repoURL: https://cowboysysop.github.io/charts/
 #    repoURL: https://github.com/cowboysysop/charts/tree/master/charts/whoami
     targetRevision: 'latest'
