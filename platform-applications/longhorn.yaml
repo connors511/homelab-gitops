@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: platform
+  source:
+    path: platform/longhorn
+    repoURL: https://github.com/connors511/homelab-gitops.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: false
