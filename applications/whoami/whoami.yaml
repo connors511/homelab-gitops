@@ -6,7 +6,7 @@ metadata:
 spec:
   project: applications
   source:
-    chart: whoami
+    chart: cowboysysop/whoami
     repoURL: https://cowboysysop.github.io/charts/
     targetRevision: 5.1.0
     helm:
