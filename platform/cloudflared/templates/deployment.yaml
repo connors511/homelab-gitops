@@ -26,7 +26,7 @@ spec:
                     operator: In
                     values:
                       - cloudflared
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
 #            - podAffinityTerm:
 #                labelSelector:
 #                  matchLabels:
