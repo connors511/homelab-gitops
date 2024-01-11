@@ -6,9 +6,10 @@ metadata:
 spec:
   project: applications
   source:
-    chart: cowboysysop/whoami
-    repoURL: https://cowboysysop.github.io/charts/
-    targetRevision: 5.1.0
+    chart: whoami
+#    repoURL: https://cowboysysop.github.io/charts/
+    repoURL: https://github.com/cowboysysop/charts/tree/master/charts/whoami
+    targetRevision: '>=5.*.*'
     helm:
       valuesObject:
         replicaCount: 2
