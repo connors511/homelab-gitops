@@ -8,6 +8,8 @@ helmCharts:
     version: 1.5.3
     namespace: longhorn-system
     valuesInline:
+      helmPreUpgradeCheckerJob:
+        enabled: false
       ipam:
         mode: kubernetes
       hostFirewall:
