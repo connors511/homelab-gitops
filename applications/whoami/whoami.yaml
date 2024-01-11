@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: whoami
-  namespace: default
+  namespace: argocd
 spec:
   project: applications
   source:
@@ -24,7 +24,7 @@ spec:
                 - "/"
           pathType: Prefix
   destination:
-    server: '{{url}}'
+    server: https://kubernetes.default.svc
     namespace: whoami
   syncPolicy:
     automated:
