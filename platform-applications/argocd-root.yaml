@@ -21,25 +21,6 @@ spec:
     - "*"
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: devops
-  namespace: argocd
-spec:
-  description: Resources required for the platform.
-  clusterResourceWhitelist:
-    - group: "*"
-      kind: "*"
-  destinations:
-    - namespace: "*"
-      server: "*"
-  namespaceResourceWhitelist:
-    - group: "*"
-      kind: "*"
-  sourceRepos:
-    - "*"
----
-apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: platform
