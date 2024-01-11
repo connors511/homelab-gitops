@@ -57,31 +57,31 @@ spec:
       kind: "*"
   sourceRepos:
     - "*"
-#---
-#apiVersion: argoproj.io/v1alpha1
-#kind: ApplicationSet
-#metadata:
-#  name: applications
-#  namespace: argocd
-#spec:
-#  generators:
-#    - git:
-#        repoURL: https://github.com/connors511/homelab-gitops.git
-#        revision: HEAD
-#        directories:
-#          - path: applications/*
-#  template:
-#    metadata:
-#      name: "{{path.basename}}"
-#    spec:
-#      project: applications
-#      syncPolicy:
-#        automated:
-#          allowEmpty: true
-#          prune: true
-#      source:
-#        repoURL: https://github.com/connors511/homelab-gitops.git
-#        path: "{{path}}"
-#      destination:
-#        server: https://kubernetes.default.svc
-#        namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applications
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/connors511/homelab-gitops.git
+        revision: HEAD
+        directories:
+          - path: applications/*
+  template:
+    metadata:
+      name: "{{path.basename}}"
+    spec:
+      project: applications
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+      source:
+        repoURL: https://github.com/connors511/homelab-gitops.git
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
