@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx
   namespace: argocd
 spec:
-  project: devops
+  project: platform
   source:
     helm:
       version: v3
