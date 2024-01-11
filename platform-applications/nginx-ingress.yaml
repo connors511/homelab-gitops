@@ -14,7 +14,7 @@ spec:
         - name: ingress-nginx.controller.admissionWebhooks.enabled
           value: "false"
         - name: ingess-nginx.controller.replicaCount
-          value: 2
+          value: "2"
     path: platform/ingress-nginx
     repoURL: https://github.com/connors511/homelab-gitops.git
     targetRevision: HEAD

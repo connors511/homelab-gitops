@@ -19,9 +19,8 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
                 labelSelector:
                   matchLabels:
                     app: cloudflared
