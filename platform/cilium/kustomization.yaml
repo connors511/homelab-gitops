@@ -15,6 +15,13 @@ helmCharts:
           enabled: true
         ui:
           enabled: true
+          ingress:
+            annotations:
+              kubernetes.io/ingress.class: "nginx"
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+            hosts:
+              - hubble.mlad.dk
         peerService:
           clusterDomain: local.homelab.mlad.dk
       kubeProxyReplacement: strict
