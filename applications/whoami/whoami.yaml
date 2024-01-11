@@ -6,10 +6,9 @@ metadata:
 spec:
   project: applications
   source:
-    chart: cowboysysop/whoami
-    repoURL: https://cowboysysop.github.io/charts/
-#    repoURL: https://github.com/cowboysysop/charts/tree/master/charts/whoami
-    targetRevision: 'latest'
+    targetRevision: '>=5.*.*'
+    repoURL: 'https://stefanprodan.github.io/podinfo'
+    chart: podinfo
     helm:
       valuesObject:
         replicaCount: 2
