@@ -1,0 +1,21 @@
+# .sops.yaml
+---
+creation_rules:
+#  - unencrypted_regex: "^(apiVersion|metadata|kind|type)$"
+#    path_regex: .*\.sops\.ya?ml
+#    path_regex: "*.sops.ya?ml"
+  - path_regex: .*\.sops\.ya?ml
+    encrypted_regex: ^(data|stringData)$
+    age: age1uklvgjw0zfn5qy8qcaggl0g9x3dk8ysq9f3my500vm567rkd2syqkxqgtw
+
+  - path_regex: talosconfig
+    encrypted_regex: ^key$
+    age: age1uklvgjw0zfn5qy8qcaggl0g9x3dk8ysq9f3my500vm567rkd2syqkxqgtw
+
+  - path_regex: kubeconfig
+    encrypted_regex: ^client-key-data$
+    age: age1uklvgjw0zfn5qy8qcaggl0g9x3dk8ysq9f3my500vm567rkd2syqkxqgtw
+
+  - path_regex: secrets.yaml
+    encrypted_regex: ^(secret|bootstraptoken|secretboxencryptionsecret|token|key)$
+    age: age1uklvgjw0zfn5qy8qcaggl0g9x3dk8ysq9f3my500vm567rkd2syqkxqgtw
