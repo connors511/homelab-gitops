@@ -38,7 +38,7 @@ data:
   application.instanceLabelKey: argocd.argoproj.io/instance
 
   # Must explicitly enable helm to support helmCharts property in kustomization.yaml
-  kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm --enable-alpha-plugins --enable-exec
+  kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm --enable-alpha-plugins
 
   # Ignore differences for commonly troublesome webhooks properties
   resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration:
