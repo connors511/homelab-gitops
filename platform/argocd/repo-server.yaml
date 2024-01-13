@@ -37,5 +37,6 @@ spec:
             - mountPath: /usr/local/bin/ksops
               name: custom-tools
               subPath: ksops
-            - mountPath: /.config/sops/age
+            - mountPath: /.config/sops/age/keys.txt
               name: sops-age
+              subPath: keys.txt
