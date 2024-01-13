@@ -7,3 +7,4 @@ resources:
 patchesStrategicMerge:
   - ./config.yaml
   - ./repo-server.yaml
+  - ./config-cm-params.yaml
