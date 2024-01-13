@@ -1,3 +1,5 @@
+namespace: firefly
+
 generators:
   - ./namespace.yaml
   - ./secret-generator.yaml
