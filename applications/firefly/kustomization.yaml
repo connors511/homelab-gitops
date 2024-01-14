@@ -31,6 +31,7 @@ helmCharts:
         enabled: true
       ingress:
         enabled: true
+        ingressClassName: nginx
         hosts:
           - budget.mlad.dk
 
