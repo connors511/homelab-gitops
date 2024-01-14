@@ -17,6 +17,7 @@ helmCharts:
         port: 8080
       config:
         env:
+          TZ: "Europe/Copenhagen"
           APP_ENV: production
           DB_HOST: cluster-01-haproxy.percona-xtradb
           DB_CONNECTION: mysql
@@ -25,13 +26,37 @@ helmCharts:
           DB_USERNAME: firefly
           MAIL_MAILER: log
           MAIL_FROM: changeme@example.com
-#          TRUSTED_PROXIES: '**'
-        existingSecret: firefly-env-secret
+        #          TRUSTED_PROXIES: '**'
+        existingSecret: firefly-importer-secret
       cronjob:
         enabled: true
+        auth:
+          existingSecret: firefly-cron-secret
       ingress:
         enabled: true
         className: nginx
         hosts:
           - budget.mlad.dk
+
+  - name: firefly-iii-importer
+    repo: https://firefly-iii.github.io/kubernetes/
+    releaseName: importer
+    version: 1.3.1
+    namespace: firefly
+    valuesInline:
+      service:
+        port: 8080
+      config:
+        env:
+          IGNORE_DUPLICATE_ERRORS: "false"
+          TZ: "Europe/Copenhagen"
+      fireflyiii:
+        url: "http://firefly-iii:8080"
+        auth:
+          existingSecret: firefly-env-secret
+      ingress:
+        enabled: true
+        className: nginx
+        hosts:
+          - budget-importer.mlad.dk
 
