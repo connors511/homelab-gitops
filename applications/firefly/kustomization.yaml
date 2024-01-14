@@ -50,7 +50,7 @@ helmCharts:
         env:
           IGNORE_DUPLICATE_ERRORS: "false"
           TZ: "Europe/Copenhagen"
-          FIREFLY_III_CLIENT_ID: 7
+          FIREFLY_III_CLIENT_ID: 10
       fireflyiii:
         url: "https://budget.mlad.dk"
 #        auth:
