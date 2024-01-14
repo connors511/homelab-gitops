@@ -27,7 +27,7 @@ helmCharts:
           MAIL_MAILER: log
           MAIL_FROM: changeme@example.com
         #          TRUSTED_PROXIES: '**'
-        existingSecret: firefly-importer-secret
+        existingSecret: firefly-env-secret
       cronjob:
         enabled: true
         auth:
@@ -50,6 +50,7 @@ helmCharts:
         env:
           IGNORE_DUPLICATE_ERRORS: "false"
           TZ: "Europe/Copenhagen"
+          FIREFLY_III_CLIENT_ID: 7
       fireflyiii:
         url: "http://firefly-iii:8080"
 #        auth:
