@@ -2,7 +2,6 @@ namespace: firefly
 
 resources:
   - ./namespace.yaml
-  - ./db.yaml
 
 generators:
   - ./secret-generator.yaml
