@@ -2,6 +2,7 @@ apiVersion: pxc.percona.com/v1
 kind: PerconaXtraDBCluster
 metadata:
   name: firefly-cluster
+  namespace: percona-xtradb
   finalizers:
     - delete-pxc-pods-in-order
 #    - delete-ssl
