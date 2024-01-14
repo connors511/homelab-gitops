@@ -30,7 +30,5 @@ helmCharts:
       ingress:
         enabled: true
         hosts:
-          - host: budget.mlad.dk
-            paths:
-              - "/"
+          - budget.mlad.dk
 
