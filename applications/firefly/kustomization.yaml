@@ -5,3 +5,26 @@ resources:
 
 generators:
   - ./secret-generator.yaml
+
+helmCharts:
+  - name: firefly-iii
+    repo: https://firefly-iii.github.io/kubernetes/
+    releaseName: firefly-iii
+    version: 1.7.1
+    namespace: firefly
+    valuesInline:
+      config:
+        env:
+          APP_ENV: production
+          DB_HOST: cluster-01.percona-xtradb
+#          TRUSTED_PROXIES: '**'
+        existingSecret: firefly-env-secret
+      cronjob:
+        enabled: true
+      ingress:
+        enabled: true
+        hosts:
+          - host: budget.mlad.dk
+            paths:
+              - "/"
+
