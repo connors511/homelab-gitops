@@ -16,7 +16,13 @@ helmCharts:
       config:
         env:
           APP_ENV: production
-          DB_HOST: cluster-01.percona-xtradb
+          DB_HOST: cluster-01-haproxy.percona-xtradb
+          DB_CONNECTION: mysql
+          DB_PORT: 3306
+          DB_DATABASE: firefly
+          DB_USERNAME: firefly
+          MAIL_MAILER: log
+          MAIL_FROM: changeme@example.com
 #          TRUSTED_PROXIES: '**'
         existingSecret: firefly-env-secret
       cronjob:
