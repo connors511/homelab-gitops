@@ -52,8 +52,8 @@ helmCharts:
           TZ: "Europe/Copenhagen"
       fireflyiii:
         url: "http://firefly-iii:8080"
-        auth:
-          existingSecret: firefly-import-secret
+#        auth:
+#          existingSecret: firefly-import-secret
       ingress:
         enabled: true
         className: nginx
