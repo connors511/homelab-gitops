@@ -1,0 +1,222 @@
+apiVersion: pxc.percona.com/v1
+kind: PerconaXtraDBCluster
+metadata:
+  name: firefly-cluster
+  finalizers:
+    - delete-pxc-pods-in-order
+#    - delete-ssl
+#    - delete-proxysql-pvc
+#    - delete-pxc-pvc
+#  annotations:
+#    percona.com/issue-vault-token: "true"
+spec:
+  crVersion: 1.13.0
+  #  ignoreAnnotations:
+  #    - iam.amazonaws.com/role
+  #  ignoreLabels:
+  #    - rack
+  #  secretsName: cluster1-secrets
+  #  vaultSecretName: keyring-secret-vault
+  #  sslSecretName: cluster1-ssl
+  #  sslInternalSecretName: cluster1-ssl-internal
+  #  logCollectorSecretName: cluster1-log-collector-secrets
+  #  initImage: perconalab/percona-xtradb-cluster-operator:main
+  enableCRValidationWebhook: true
+  allowUnsafeConfigurations: false
+  #  pause: false
+  updateStrategy: SmartUpdate
+  upgradeOptions:
+    versionServiceEndpoint: https://check.percona.com
+    apply: disabled
+    schedule: "0 4 * * *"
+  pxc:
+    size: 3
+    image: percona/percona-xtradb-cluster:8.0.32-24.2
+    autoRecovery: true
+    #    configuration: |
+    #      [mysqld]
+    #      wsrep_debug=CLIENT
+    #      wsrep_provider_options="gcache.size=1G; gcache.recover=yes"
+    #      [sst]
+    #      xbstream-opts=--decompress
+    #      [xtrabackup]
+    #      compress=lz4
+    #      for PXC 5.7
+    #      [xtrabackup]
+    #      compress
+    #    imagePullSecrets:
+    #      - name: private-registry-credentials
+    #    priorityClassName: high-priority
+    #    readinessProbes:
+    #      initialDelaySeconds: 15
+    #      timeoutSeconds: 15
+    #      periodSeconds: 30
+    #      successThreshold: 1
+    #      failureThreshold: 5
+    #    livenessProbes:
+    #      initialDelaySeconds: 300
+    #      timeoutSeconds: 5
+    #      periodSeconds: 10
+    #      successThreshold: 1
+    #      failureThreshold: 3
+    #    containerSecurityContext:
+    #      privileged: false
+    #    podSecurityContext:
+    #      runAsUser: 1001
+    #      runAsGroup: 1001
+    #      supplementalGroups: [1001]
+    #    serviceAccountName: percona-xtradb-cluster-operator-workload
+    #    imagePullPolicy: Always
+    #    runtimeClassName: image-rc
+    #    envVarsSecret: my-env-var-secrets
+    resources:
+      requests:
+        memory: 1G
+        cpu: 600m
+    #        ephemeral-storage: 1G
+    #      limits:
+    #        memory: 1G
+    #        cpu: "1"
+    #        ephemeral-storage: 1G
+    #    nodeSelector:
+    #      disktype: ssd
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+    podDisruptionBudget:
+      maxUnavailable: 1
+    volumeSpec:
+      #      emptyDir: {}
+      #      hostPath:
+      #        path: /data
+      #        type: Directory
+      persistentVolumeClaim:
+        #        storageClassName: standard
+        #        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 6G
+    gracePeriod: 600
+  haproxy:
+    enabled: true
+    size: 3
+    image: percona/percona-xtradb-cluster-operator:1.13.0-haproxy
+    resources:
+      requests:
+        memory: 1G
+        cpu: 600m
+    #      limits:
+    #        memory: 1G
+    #        cpu: 700m
+    #    priorityClassName: high-priority
+    #    containerSecurityContext:
+    #      privileged: false
+    #    podSecurityContext:
+    #      runAsUser: 1001
+    #      runAsGroup: 1001
+    #      supplementalGroups: [1001]
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+    #      tolerationSeconds: 6000
+    podDisruptionBudget:
+      maxUnavailable: 1
+    #      minAvailable: 0
+    gracePeriod: 30
+  proxysql:
+    enabled: false
+  logcollector:
+    enabled: true
+    image: percona/percona-xtradb-cluster-operator:1.13.0-logcollector
+    #    configuration: |
+    #      [OUTPUT]
+    #           Name  es
+    #           Match *
+    #           Host  192.168.2.3
+    #           Port  9200
+    #           Index my_index
+    #           Type  my_type
+    resources:
+      requests:
+        memory: 100M
+        cpu: 200m
+  pmm:
+    enabled: false
+    image: percona/pmm-client:2.38.0
+    serverHost: monitoring-service
+    #    serverUser: admin
+    #    pxcParams: "--disable-tablestats-limit=2000"
+    #    proxysqlParams: "--custom-labels=CUSTOM-LABELS"
+    resources:
+      requests:
+        memory: 150M
+        cpu: 300m
+  backup:
+    #    allowParallel: true
+    image: percona/percona-xtradb-cluster-operator:1.13.0-pxc8.0-backup-pxb8.0.32
+    #    backoffLimit: 6
+    #    serviceAccountName: percona-xtradb-cluster-operator
+    #    imagePullSecrets:
+    #      - name: private-registry-credentials
+    pitr:
+      enabled: false
+      storageName: STORAGE-NAME-HERE
+      timeBetweenUploads: 60
+    #      resources:
+    #        requests:
+    #          memory: 0.1G
+    #          cpu: 100m
+    #        limits:
+    #          memory: 1G
+    #          cpu: 700m
+    storages:
+      #          endpointUrl: https://accountName.blob.core.windows.net
+      #          storageClass: Hot
+      fs-pvc:
+        type: filesystem
+        #        nodeSelector:
+        #          storage: tape
+        #          backupWorker: 'True'
+        #        resources:
+        #          requests:
+        #            memory: 1G
+        #            cpu: 600m
+        #        affinity:
+        #          nodeAffinity:
+        #            requiredDuringSchedulingIgnoredDuringExecution:
+        #              nodeSelectorTerms:
+        #              - matchExpressions:
+        #                - key: backupWorker
+        #                  operator: In
+        #                  values:
+        #                  - 'True'
+        #        tolerations:
+        #          - key: "backupWorker"
+        #            operator: "Equal"
+        #            value: "True"
+        #            effect: "NoSchedule"
+        #        annotations:
+        #          testName: scheduled-backup
+        #        labels:
+        #          backupWorker: 'True'
+        #        schedulerName: 'default-scheduler'
+        #        priorityClassName: 'high-priority'
+        #        containerSecurityContext:
+        #          privileged: true
+        #        podSecurityContext:
+        #          fsGroup: 1001
+        #          supplementalGroups: [1001, 1002, 1003]
+        volume:
+          persistentVolumeClaim:
+            #            storageClassName: standard
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 6G
+    schedule:
+      #      - name: "sat-night-backup"
+      #        schedule: "0 0 * * 6"
+      #        keep: 3
+      #        storageName: s3-us-west
+      - name: "daily-backup"
+        schedule: "0 0 * * *"
+        keep: 5
+        storageName: fs-pvc
