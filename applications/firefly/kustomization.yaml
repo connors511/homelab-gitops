@@ -53,7 +53,7 @@ helmCharts:
       fireflyiii:
         url: "http://firefly-iii:8080"
         auth:
-          existingSecret: firefly-env-secret
+          existingSecret: firefly-import-secret
       ingress:
         enabled: true
         className: nginx
