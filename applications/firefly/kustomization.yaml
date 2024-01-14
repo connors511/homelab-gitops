@@ -52,7 +52,8 @@ helmCharts:
           TZ: "Europe/Copenhagen"
           FIREFLY_III_CLIENT_ID: 10
       fireflyiii:
-        url: "https://budget.mlad.dk"
+        url: "http://firefly-iii:8080"
+        vanityUrl: "https://budget.mlad.dk"
 #        auth:
 #          existingSecret: firefly-import-secret
       ingress:
