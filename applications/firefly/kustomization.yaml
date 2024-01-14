@@ -51,6 +51,7 @@ helmCharts:
           IGNORE_DUPLICATE_ERRORS: "false"
           TZ: "Europe/Copenhagen"
           FIREFLY_III_CLIENT_ID: 10
+        files: {}
       fireflyiii:
         url: "http://firefly-iii:8080"
         vanityUrl: "https://budget.mlad.dk"
