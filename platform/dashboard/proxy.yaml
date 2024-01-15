@@ -20,6 +20,10 @@ spec:
             - --oidc-issuer-url=https://homelab-pnqnnc.zitadel.cloud
             - --email-domain=*
             - --upstream=https://k8s.mlad.dk
+            - --provider-display-name=Zitadel
+            - --pass-access-token
+            - --skip-provider-button
+            - --redirect-url=https://k8s.mlad.dk
             - --http-address=0.0.0.0:4180
           env:
             - name: OAUTH2_PROXY_CLIENT_ID
