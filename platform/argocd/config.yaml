@@ -7,6 +7,9 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   url: https://argocd.mlad.dk
+
+  accounts.mlarsen: apiKey, login
+
   # dex.config: |
   #   connectors:
   #     - type: oidc
