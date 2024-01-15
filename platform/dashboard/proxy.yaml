@@ -17,7 +17,7 @@ spec:
       containers:
         - args:
             - --provider=oidc
-            - --oidc-issuer-url="https://homelab-pnqnnc.zitadel.cloud"
+            - --oidc-issuer-url=https://homelab-pnqnnc.zitadel.cloud
             - --email-domain=*
             - --upstream=file:///dev/null
             - --http-address=0.0.0.0:4180
