@@ -2,9 +2,9 @@ namespace: argocd # NOTE: namespace is created via kubectl during bootstrapping
 resources:
   - ./namespace.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.4/manifests/install.yaml
+  - ./ingress-dex.yaml
 
 # The following can't be added as `resources` because the install manifest already have them defined
 patchesStrategicMerge:
   - ./config.yaml
   - ./repo-server.yaml
-  - ./ingress-dex.yaml
