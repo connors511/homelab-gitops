@@ -75,6 +75,11 @@ helmCharts:
             type: prometheus
             url: http://prometheus.linkerd-viz.svc:9090
 
+        ingress:
+          enabled: true
+          hosts:
+            - grafana.mlad.dk
+
       prometheus-node-exporter:
         prometheus:
           monitor:
