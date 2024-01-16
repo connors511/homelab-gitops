@@ -8,4 +8,4 @@ roleRef:
   name: cluster-admin
 subjects:
   - kind: Group
-    name: admin
+    name: cluster-admin
