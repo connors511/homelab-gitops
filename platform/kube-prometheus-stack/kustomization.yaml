@@ -54,11 +54,11 @@ helmCharts:
         #   enabled: true
         #   size: 10Gi
         #   accessModes: ["ReadWriteOnce"]
-        # grafana.ini:
-        #   server:
-        #     root_url: https://grafana.example.com
-        #   users:
-        #     auto_assign_org_role: Editor
+        grafana.ini:
+          server:
+            root_url: https://grafana.example.com
+          users:
+            auto_assign_org_role: Editor
         #   auth.proxy:
         #     enabled: true
         #     header_name: cf-access-authenticated-user-email
