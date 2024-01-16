@@ -12,3 +12,5 @@ subjects:
     name: "oidc:cluster-admin"
   - kind: Group
     name: "oidc:cluster-admin"
+  - kind: Group
+    name: "cluster-admin"
