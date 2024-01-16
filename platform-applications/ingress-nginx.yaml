@@ -9,6 +9,7 @@ spec:
     helm:
       version: v3
       releaseName: ingress-nginx
+      fullnameOverride: ingress-nginx
       parameters:
         - name: ingress-nginx.controller.extraArgs.enable-ssl-passthrough
           value: ""
