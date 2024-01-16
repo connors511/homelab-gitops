@@ -8,9 +8,7 @@ roleRef:
   name: cluster-admin
 subjects:
   - kind: Group
-    name: "oidc:cluster-admin"
-#  - kind: Group
-#    name: "cluster-admin"
+    name: "cluster-admin"
 #  - kind: User
 #    name: "oidc:mlarsen"
 #    apiGroup: rbac.authorization.k8s.io
