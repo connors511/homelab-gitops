@@ -11,8 +11,26 @@ helmCharts:
           kubernetes.io/ingress.class: "nginx"
           nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+
+          nginx.ingress.kubernetes.io/auth-url: "https://k8s.mlad.dk/oauth2/auth?allowed_groups=cluster-admin"
+          nginx.ingress.kubernetes.io/auth-signin: "https://k8s.mlad.dk/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+          #    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            auth_request_set $token $upstream_http_authorization;
+            proxy_set_header Authorization $token;
         pathType: Prefix
         hosts:
           - host: whoami.mlad.dk
             paths:
               - "/"
+          - host: whoami.mlad.dk
+            http:
+              paths:
+                - path: /oauth2
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: oauth2-proxy
+                      port:
+                        number: 4180
