@@ -19,8 +19,8 @@ spec:
             - --provider=oidc
             - --oidc-issuer-url=https://homelab-pnqnnc.zitadel.cloud
             - --email-domain=*
-#            - --upstream=https://kubernetes-dashboard:8443
-            - --upstream=file:///dev/null
+            - --upstream=https://kubernetes-dashboard:8443
+#            - --upstream=file:///dev/null
             - --set-authorization-header=true
             - --provider-display-name=Zitadel
             - --pass-access-token=true
