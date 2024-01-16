@@ -12,8 +12,8 @@ helmCharts:
           nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 
-          nginx.ingress.kubernetes.io/auth-url: "https://whoami.mlad.dk/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://whoami.mlad.dk/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/auth-url: "https://k8s.mlad.dk/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://k8s.mlad.dk/oauth2/start?rd=$escaped_request_uri"
           nginx.ingress.kubernetes.io/ssl-passthrough: "true"
           #    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
           nginx.ingress.kubernetes.io/configuration-snippet: |
