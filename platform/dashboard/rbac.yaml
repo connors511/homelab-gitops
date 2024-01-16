@@ -2,10 +2,10 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: zitadel-admin-group
+subjects:
+  - kind: Group
+    name: oidc:cluster-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
-subjects:
-  - kind: Group
-    name: cluster-admin
