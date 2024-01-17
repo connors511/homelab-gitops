@@ -60,3 +60,12 @@ data:
     |
     jsonPointers:
       - /spec/names/shortNames
+
+  # Ignore CiliumIdentity's from making resources OutOfSync
+  resource.exclusions: |
+    - apiGroups:
+      - cilium.io
+      kinds:
+      - CiliumIdentity
+      clusters:
+      - "*"
