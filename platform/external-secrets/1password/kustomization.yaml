@@ -1,0 +1,18 @@
+resources:
+  - ./clustersecretstore.yaml
+
+helmCharts:
+  - name: connect
+    releaseName: onepassword
+    repo: https://1password.github.io/connect-helm-charts
+    version: 1.14.0
+    namespace: kube-system
+    includeCRDs: true
+    valuesInline:
+      namespace: kube-system
+      connect:
+        credentialsName: op-credentials
+        credentialsKey: 1password-credentials.json
+      operator:
+        create: false
+      serviceType: ClusterIP
