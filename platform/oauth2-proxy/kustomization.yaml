@@ -23,6 +23,7 @@ helmCharts:
         hosts: [ auth.mlad.dk ]
       extraArgs:
         provider: oidc
+        issuer-url: https://homelab-pnqnnc.zitadel.cloud
         skip-provider-button:
         pass-authorization-header:
         email-domain: "*"
@@ -32,6 +33,8 @@ helmCharts:
         type: redis
       redis:
         enabled: true
+      config:
+        existingSecret: oauth2-proxy-secret
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -42,20 +45,20 @@ helmCharts:
                     values:
                       - oauth2-proxy
               topologyKey: "kubernetes.io/hostname"
-    valuesFrom:
-      - targetPath: config.clientID
-        kind: Secret
-        name: oauth2-proxy-secret
-        valuesKey: ZITADEL_CLIENT_ID
-      - targetPath: config.clientSecret
-        kind: Secret
-        name: oauth2-proxy-secret
-        valuesKey: ZITADEL_CLIENT_SECRET
-      - targetPath: extraArgs.oidc-issuer-url
-        kind: Secret
-        name: oauth2-proxy-secret
-        valuesKey: ZITADEL_ISSUER_URL
-      - targetPath: config.cookieSecret
-        kind: Secret
-        name: oauth2-proxy-secret
-        valuesKey: OAUTH2_PROXY_COOKIE_SECRET
+#      valuesFrom:
+#        - targetPath: config.clientID
+#          kind: Secret
+#          name: oauth2-proxy-secret
+#          valuesKey: ZITADEL_CLIENT_ID
+#        - targetPath: config.clientSecret
+#          kind: Secret
+#          name: oauth2-proxy-secret
+#          valuesKey: ZITADEL_CLIENT_SECRET
+#        - targetPath: extraArgs.oidc-issuer-url
+#          kind: Secret
+#          name: oauth2-proxy-secret
+#          valuesKey: ZITADEL_ISSUER_URL
+#        - targetPath: config.cookieSecret
+#          kind: Secret
+#          name: oauth2-proxy-secret
+#          valuesKey: OAUTH2_PROXY_COOKIE_SECRET
