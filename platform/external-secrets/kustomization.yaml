@@ -1,5 +1,5 @@
 resources:
-  - ./namespace.yaml
+  - ./1password
 
 helmCharts:
   - name: external-secrets
