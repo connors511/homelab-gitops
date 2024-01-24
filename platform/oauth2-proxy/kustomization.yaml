@@ -7,6 +7,7 @@ helmCharts:
   - name: oauth2-proxy
     releaseName: oauth2-proxy
     repo: https://oauth2-proxy.github.io/manifests
+    namespace: kube-system
     version: 6.23.1
     valuesInline:
       image:
