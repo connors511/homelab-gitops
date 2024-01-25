@@ -30,10 +30,10 @@ helmCharts:
           containers:
             main:
               image:
-                repository: nodered/node-red
-                tag: 3.1.3-18-minimal
-#                repository: docker.io/nodered/node-red
-#                tag: 3.1.3
+#                repository: nodered/node-red
+#                tag: 3.1.3-18-minimal
+                repository: docker.io/nodered/node-red
+                tag: 3.1.3
               resources:
                 requests:
                   cpu: 5m
