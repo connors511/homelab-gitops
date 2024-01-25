@@ -81,6 +81,7 @@ helmCharts:
         config-file:
           type: secret
           name: node-red-ssh
+          defaultMode: 0644
           globalMounts:
             - path: /usr/src/node-red/.ssh/id_ed25519
               subPath: private
