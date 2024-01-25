@@ -35,8 +35,9 @@ helmCharts:
         cookie-domain: .ha.mlad
         whitelist-domain: .ha.mlad
         code-challenge-method: S256
-      sessionStorage:
-        type: redis
+        cookie-secure:
+#      sessionStorage:
+#        type: redis
       redis:
         enabled: true
         clusterDomain: homelab.mlad.dk
