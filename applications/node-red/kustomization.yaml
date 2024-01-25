@@ -2,6 +2,8 @@ namespace: node-red
 
 resources:
   - ./namespace.yaml
+  - ./externalsecret.yaml
+  - ./externalsecret-ssh.yaml
 
 #generators:
 #  - ./secret-generator.yaml
@@ -13,15 +15,37 @@ helmCharts:
     version: 1.5.1
     namespace: node-red
     valuesInline:
-      image:
-        repository: nodered/node-red
-        tag: 3.1.3-18-minimal
+      controllers:
+        main:
+          annotations:
+            reloader.stakater.com/auto: "true"
 
-      env:
-        TZ: "Europe/Copenhagen"
-        FLOWS: "flows.json"
-        NODE_RED_ENABLE_PROJECTS: "true"
-        NODE_RED_ENABLE_SAFE_MODE: "false"
+          pod:
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: "OnRootMismatch"
+
+          containers:
+            main:
+              image:
+                repository: nodered/node-red
+                tag: 3.1.3-18-minimal
+              resources:
+                requests:
+                  cpu: 5m
+                  memory: 512Mi
+                limits:
+                  memory: 512Mi
+              envFrom:
+                - secretRef:
+                    name: node-red-secret
+              env:
+                TZ: "Europe/Copenhagen"
+                FLOWS: "flows.json"
+                NODE_RED_ENABLE_PROJECTS: "true"
+                NODE_RED_ENABLE_SAFE_MODE: "false"
 
       service:
         main:
@@ -45,12 +69,6 @@ helmCharts:
             - hosts:
                 - node-red.mlad.dk
 
-      podSecurityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
-
       persistence:
         data:
           enabled: true
@@ -58,6 +76,24 @@ helmCharts:
 #          storageClass: "rook-ceph-block"
           accessMode: ReadWriteOnce
           size: "5Gi"
+
+        config-file:
+          type: secret
+          name: node-red-ssh
+          globalMounts:
+            - path: /usr/src/node-red/.ssh/id_ed25519
+              subPath: private
+              readOnly: true
+            - path: /usr/src/node-red/.ssh/id_ed25519.pub
+              subPath: public
+              readOnly: true
+#        config-file:
+#          type: configMap
+#          name: node-red-configmap
+#          globalMounts:
+#            - path: /data/settings.js
+#              subPath: settings.js
+#              readOnly: true
 
       tolerations:
         - key: "arm"
