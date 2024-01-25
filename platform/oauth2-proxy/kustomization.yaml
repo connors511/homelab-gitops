@@ -33,7 +33,7 @@ helmCharts:
         set-authorization-header:
         email-domain: "*"
         cookie-domain: .ha.mlad
-        whitelist-domain: .ha.mlad
+        whitelist-domain: .mlad.dk
         code-challenge-method: S256
         cookie-secure:
 #      sessionStorage:
