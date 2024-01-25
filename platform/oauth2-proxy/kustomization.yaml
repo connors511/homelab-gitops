@@ -23,7 +23,7 @@ helmCharts:
         hosts: [ auth.mlad.dk ]
       extraArgs:
         provider: oidc
-        issuer-url: https://homelab-pnqnnc.zitadel.cloud
+        oidc-issuer-url: https://homelab-pnqnnc.zitadel.cloud
         skip-provider-button:
         pass-authorization-header:
         email-domain: "*"
