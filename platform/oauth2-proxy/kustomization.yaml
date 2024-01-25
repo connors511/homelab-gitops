@@ -28,6 +28,9 @@ helmCharts:
         oidc-issuer-url: https://homelab-pnqnnc.zitadel.cloud
         skip-provider-button:
         pass-authorization-header:
+        pass-access-token:
+        pass-user-headers:
+        set-authorization-header:
         email-domain: "*"
         cookie-domain: .ha.mlad
         whitelist-domain: .ha.mlad
