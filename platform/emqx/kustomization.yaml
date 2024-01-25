@@ -15,6 +15,7 @@ helmCharts:
         repository: emqx/emqx
       replicaCount: 3
       recreatePods: true
+      envFromSecret: emqx-secret
 #        service:
 #          type: LoadBalancer
 #          loadBalancerIP: 10.0.6.50
@@ -67,13 +68,3 @@ helmCharts:
           path: /
           hosts:
             - emqx.mlad.dk
-
-      valuesFrom:
-        - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
-          kind: Secret
-          name: emqx-secret
-          valuesKey: admin_password
-        - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
-          kind: Secret
-          name: emqx-secret
-          valuesKey: user_1_password

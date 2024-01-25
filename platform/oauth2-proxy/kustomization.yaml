@@ -29,6 +29,7 @@ helmCharts:
         email-domain: "*"
         cookie-domain: .ha.mlad
         whitelist-domain: .ha.mlad
+        code-challenge-method: S256
       sessionStorage:
         type: redis
       redis:
@@ -45,20 +46,3 @@ helmCharts:
                     values:
                       - oauth2-proxy
               topologyKey: "kubernetes.io/hostname"
-#      valuesFrom:
-#        - targetPath: config.clientID
-#          kind: Secret
-#          name: oauth2-proxy-secret
-#          valuesKey: ZITADEL_CLIENT_ID
-#        - targetPath: config.clientSecret
-#          kind: Secret
-#          name: oauth2-proxy-secret
-#          valuesKey: ZITADEL_CLIENT_SECRET
-#        - targetPath: extraArgs.oidc-issuer-url
-#          kind: Secret
-#          name: oauth2-proxy-secret
-#          valuesKey: ZITADEL_ISSUER_URL
-#        - targetPath: config.cookieSecret
-#          kind: Secret
-#          name: oauth2-proxy-secret
-#          valuesKey: OAUTH2_PROXY_COOKIE_SECRET
