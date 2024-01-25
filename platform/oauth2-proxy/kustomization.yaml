@@ -19,6 +19,7 @@ helmCharts:
           operator: "Exists"
       ingress:
         enabled: true
+        className: nginx
         path: /oauth2
         pathType: Prefix
         hosts: [ auth.mlad.dk ]
