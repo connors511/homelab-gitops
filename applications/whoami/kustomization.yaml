@@ -11,6 +11,8 @@ helmCharts:
           kubernetes.io/ingress.class: "nginx"
           nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
         pathType: Prefix
         hosts:
           - host: whoami.mlad.dk
