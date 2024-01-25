@@ -15,6 +15,12 @@ helmCharts:
     version: 2.5.0
     namespace: node-red
     valuesInline:
+      podSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+
       controllers:
         main:
           annotations:
