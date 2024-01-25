@@ -32,12 +32,10 @@ helmCharts:
         pass-user-headers:
         set-authorization-header:
         email-domain: "*"
-        cookie-domain: .ha.mlad
         whitelist-domain: .mlad.dk
         code-challenge-method: S256
-        cookie-secure:
-#      sessionStorage:
-#        type: redis
+      sessionStorage:
+        type: redis
       redis:
         enabled: true
         clusterDomain: homelab.mlad.dk
