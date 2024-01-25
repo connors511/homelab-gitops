@@ -20,6 +20,7 @@ helmCharts:
       ingress:
         enabled: true
         path: /oauth2
+        pathType: Prefix
         hosts: [ auth.mlad.dk ]
       extraArgs:
         provider: oidc
