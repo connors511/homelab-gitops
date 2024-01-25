@@ -32,10 +32,10 @@ helmCharts:
         cookie-domain: .ha.mlad
         whitelist-domain: .ha.mlad
         code-challenge-method: S256
-#      sessionStorage:
-#        type: cookie
+      sessionStorage:
+        type: redis
       redis:
-        enabled: false
+        enabled: true
         clusterDomain: homelab.mlad.dk
       config:
         existingSecret: oauth2-proxy-secret
