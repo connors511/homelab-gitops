@@ -97,7 +97,7 @@ helmCharts:
                 tag: latest
               securityContext:
                 runAsUser: 0
-              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb* && sleep 1d" ]
+              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb* && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure" ]
               resources:
                 limits:
                   cpu: 5m
