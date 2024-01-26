@@ -1,4 +1,4 @@
-namespace: home-automation
+#namespace: home-automation
 
 resources:
   - ./namespace.yaml
