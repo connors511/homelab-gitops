@@ -63,7 +63,7 @@ helmCharts:
                 tag: latest
               securityContext:
                 runAsUser: 0
-              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519 && chown -R 1000:1000 /usr/src/node-red/.ssh/id*" ]
+              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519 && chown -R 1000:1000 /usr/src/node-red/.ssh/id* && chmod 0600 /usr/src/node-red/.ssh/id_ed25519" ]
               resources:
                 limits:
                   cpu: "1"
