@@ -56,7 +56,7 @@ helmCharts:
                 NODE_RED_ENABLE_SAFE_MODE: "false"
 
           initContainers:
-            sshPermission:
+            ssh-permission:
               name: ssh-perm
               image:
                 repository: busybox
