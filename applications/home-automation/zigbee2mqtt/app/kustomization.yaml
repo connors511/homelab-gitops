@@ -100,8 +100,8 @@ helmCharts:
               command: [ "sh","-c","ls -al /dev/serial/by-id && chown 1000:1000 /dev/by/serial-id/usb*" ]
               resources:
                 limits:
-                  cpu: "1"
-                  memory: 128Mi
+                  cpu: 5m
+                  memory: 10Mi
 
           affinity:
             nodeAffinity:
