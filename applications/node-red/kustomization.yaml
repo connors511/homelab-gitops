@@ -64,7 +64,7 @@ helmCharts:
               securityContext:
                 runAsUser: 0
 #                privileged: true
-              command: [ "sh","-c","mkdir -p /usr/src/node-red/.ssh && chown -R 1000:1000 /usr/src/node-red/.ssh" ]
+              command: [ "sh","-c","ls -alh /ssh-keys && ls -alh /usr/src/node-red" ]
               resources:
                 limits:
                   cpu: "1"
@@ -101,6 +101,17 @@ helmCharts:
 #          storageClass: "rook-ceph-block"
           accessMode: ReadWriteOnce
           size: "5Gi"
+
+        ssh-dist:
+          type: emptyDir
+          globalMounts:
+            - path: /usr/src/node-red/.ssh
+              readOnly: false
+
+        ssh-keys:
+          type: secret
+          name: node-red-ssh
+          defaultMode: 0644
 
         config-file:
           type: secret
