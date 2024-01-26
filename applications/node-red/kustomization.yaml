@@ -112,6 +112,7 @@ helmCharts:
           type: secret
           name: node-red-ssh
           defaultMode: 0644
+          readOnly: false
 
 #        config-file:
 #          type: secret
