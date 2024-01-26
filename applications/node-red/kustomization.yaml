@@ -63,7 +63,7 @@ helmCharts:
                 tag: latest
               securityContext:
                 runAsUser: 0
-                privileged: true
+#                privileged: true
               command: [ "sh","-c","mkdir -p /usr/src/node-red/.ssh && chown -R 1000:1000 /usr/src/node-red/.ssh" ]
               resources:
                 limits:
