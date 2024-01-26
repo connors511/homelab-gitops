@@ -64,7 +64,7 @@ helmCharts:
               securityContext:
                 runAsUser: 0
 #                privileged: true
-              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519" ]
+              command: [ "sh","-c","chown 1000:1000 /ssh-keys/p* && cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519" ]
               resources:
                 limits:
                   cpu: "1"
