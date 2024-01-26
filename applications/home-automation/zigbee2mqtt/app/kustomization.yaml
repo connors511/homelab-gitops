@@ -28,6 +28,7 @@ helmCharts:
 
           containers:
             main:
+              startupProbe: {}
               command: ['sleep 1d']
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
