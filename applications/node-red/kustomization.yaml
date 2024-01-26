@@ -64,7 +64,7 @@ helmCharts:
               securityContext:
                 runAsUser: 0
 #                privileged: true
-              command: [ "sh","-c","ls -alh /ssh-keys && ls -alh /usr/src/node-red" ]
+              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519" ]
               resources:
                 limits:
                   cpu: "1"
@@ -113,17 +113,17 @@ helmCharts:
           name: node-red-ssh
           defaultMode: 0644
 
-        config-file:
-          type: secret
-          name: node-red-ssh
-          defaultMode: 0644
-          globalMounts:
-            - path: /usr/src/node-red/.ssh/id_ed25519
-              subPath: private
-#              readOnly: true
-            - path: /usr/src/node-red/.ssh/id_ed25519.pub
-              subPath: public
-#              readOnly: true
+#        config-file:
+#          type: secret
+#          name: node-red-ssh
+#          defaultMode: 0644
+#          globalMounts:
+#            - path: /usr/src/node-red/.ssh/id_ed25519
+#              subPath: private
+##              readOnly: true
+#            - path: /usr/src/node-red/.ssh/id_ed25519.pub
+#              subPath: public
+##              readOnly: true
 #        config-file:
 #          type: configMap
 #          name: node-red-configmap
