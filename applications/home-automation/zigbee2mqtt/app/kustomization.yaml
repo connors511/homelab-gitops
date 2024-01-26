@@ -130,8 +130,8 @@ helmCharts:
             main:
               main:
                 - path: /data
-#          usb:
-#            enabled: true
-#            type: hostPath
-#            hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-#            hostPathType: CharDevice
+        usb:
+          enabled: true
+          type: hostPath
+          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
+          hostPathType: CharDevice
