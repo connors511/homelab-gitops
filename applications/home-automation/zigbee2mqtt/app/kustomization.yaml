@@ -28,6 +28,7 @@ helmCharts:
 
           containers:
             main:
+              command: ['sleep']
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
                 tag: 1.35.1
