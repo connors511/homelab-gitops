@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zigbee2mqtt
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: applications
+  source:
+    path: applications/home-automation/zigbee2mqtt/app
+    repoURL: https://github.com/connors511/homelab-gitops.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
