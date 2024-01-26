@@ -96,20 +96,20 @@ helmCharts:
                 limits:
                   memory: 256M
 
-          initContainers:
-            usb-permission:
-              name: usb-perm
-              image:
-                repository: busybox
-                tag: latest
-              securityContext:
-                runAsUser: 0
-              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb* && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure" ]
-#              command: [ "sh","-c","ls -al /dev && chmod 777 /dev/ttyACM0 && ls -al /dev/ttyACM0 && chown 1000:1000 /dev/ttyACM0 && test -w /dev/ttyACM0 && echo success || echo failure" ]
-              resources:
-                limits:
-                  cpu: 5m
-                  memory: 10Mi
+#          initContainers:
+#            usb-permission:
+#              name: usb-perm
+#              image:
+#                repository: busybox
+#                tag: latest
+#              securityContext:
+#                runAsUser: 0
+#              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb* && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure" ]
+##              command: [ "sh","-c","ls -al /dev && chmod 777 /dev/ttyACM0 && ls -al /dev/ttyACM0 && chown 1000:1000 /dev/ttyACM0 && test -w /dev/ttyACM0 && echo success || echo failure" ]
+#              resources:
+#                limits:
+#                  cpu: 5m
+#                  memory: 10Mi
 
           affinity:
             nodeAffinity:
