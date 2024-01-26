@@ -58,7 +58,9 @@ helmCharts:
           initContainers:
             sshPermission:
               name: ssh-perm
-              image: busybox:latest
+              image:
+                repository: busybox
+                tag:latest
               command: [ "sh","-c","mkdir -p /usr/src/node-red/.ssh && chown -R 1000:1000 /usr/src/node-red/.ssh" ]
               resources:
                 limits:
