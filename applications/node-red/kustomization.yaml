@@ -111,7 +111,7 @@ helmCharts:
         ssh-keys:
           type: secret
           name: node-red-ssh
-          defaultMode: 0600
+          defaultMode: 384 # 0600
 
 #        config-file:
 #          type: secret
