@@ -55,6 +55,19 @@ helmCharts:
                 NODE_RED_ENABLE_PROJECTS: "true"
                 NODE_RED_ENABLE_SAFE_MODE: "false"
 
+          initContainers:
+            sshPermission:
+              name: ssh-perm
+              image: busybox:latest
+              command: [ "sh","-c","mkdir -p /usr/src/node-red/.ssh && chown -R 1000:1000 /usr/src/node-red/.ssh" ]
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 1Gi
+#              volumeMounts:
+#                - name: vol-example
+#                  mountPath: /vol-path
+
       service:
         main:
           ports:
