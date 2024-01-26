@@ -32,7 +32,7 @@ helmCharts:
             main:
               securityContext:
                 runAsUser: 0
-              command: ["sh","-c","ls -al /dev/serial/by-id && echo $UID && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure && sleep 1d"]
+              command: ["sh","-c","ls -al /dev/serial/by-id && echo $UID && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure && node index.js"]
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
                 tag: 1.35.1
@@ -85,7 +85,7 @@ helmCharts:
 #                ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
                 DEBUG: zigbee-herdsman*
                 ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
-                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
+#                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 460800
 #                ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: false
               resources:
@@ -156,7 +156,7 @@ helmCharts:
           enabled: true
           type: hostPath
 #          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
-#          hostPath: /dev/ttyACM0
+#          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
+          hostPath: /dev/ttyACM0
           hostPathType: CharDevice
 #          defaultMode: 511 # 0700
