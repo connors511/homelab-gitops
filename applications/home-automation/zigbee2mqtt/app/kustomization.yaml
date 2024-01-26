@@ -28,6 +28,8 @@ helmCharts:
 
           containers:
             main:
+              securityContext:
+                runAsUser: 0
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
                 tag: 1.35.1
