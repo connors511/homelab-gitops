@@ -55,23 +55,23 @@ helmCharts:
                 NODE_RED_ENABLE_PROJECTS: "true"
                 NODE_RED_ENABLE_SAFE_MODE: "false"
 
-          initContainers:
-            ssh-permission:
-              name: ssh-perm
-              image:
-                repository: busybox
-                tag: latest
-              securityContext:
-                runAsUser: 0
-#                privileged: true
-              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519 && chown 1000:1000 /usr/src/node-red/.ssh/id*" ]
-              resources:
-                limits:
-                  cpu: "1"
-                  memory: 1Gi
-#              volumeMounts:
-#                - name: vol-example
-#                  mountPath: /vol-path
+#          initContainers:
+#            ssh-permission:
+#              name: ssh-perm
+#              image:
+#                repository: busybox
+#                tag: latest
+#              securityContext:
+#                runAsUser: 0
+##                privileged: true
+#              command: [ "sh","-c","cp /ssh-keys/public /usr/src/node-red/.ssh/id_ed25519.pub && cp /ssh-keys/private /usr/src/node-red/.ssh/id_ed25519 && chown -R 1000:1000 /usr/src/node-red/.ssh/id*" ]
+#              resources:
+#                limits:
+#                  cpu: "1"
+#                  memory: 1Gi
+##              volumeMounts:
+##                - name: vol-example
+##                  mountPath: /vol-path
 
       service:
         main:
@@ -102,28 +102,28 @@ helmCharts:
           accessMode: ReadWriteOnce
           size: "5Gi"
 
-        ssh-dist:
-          type: emptyDir
-          globalMounts:
-            - path: /usr/src/node-red/.ssh
-              readOnly: false
+#        ssh-dist:
+#          type: emptyDir
+#          globalMounts:
+#            - path: /usr/src/node-red/.ssh
+#              readOnly: false
+#
+#        ssh-keys:
+#          type: secret
+#          name: node-red-ssh
+#          defaultMode: 384 # 0600
 
-        ssh-keys:
+        config-file:
           type: secret
           name: node-red-ssh
           defaultMode: 384 # 0600
-
-#        config-file:
-#          type: secret
-#          name: node-red-ssh
-#          defaultMode: 0644
-#          globalMounts:
-#            - path: /usr/src/node-red/.ssh/id_ed25519
-#              subPath: private
-##              readOnly: true
-#            - path: /usr/src/node-red/.ssh/id_ed25519.pub
-#              subPath: public
-##              readOnly: true
+          globalMounts:
+            - path: /usr/src/node-red/.ssh/id_ed25519
+              subPath: private
+#              readOnly: true
+            - path: /usr/src/node-red/.ssh/id_ed25519.pub
+              subPath: public
+#              readOnly: true
 #        config-file:
 #          type: configMap
 #          name: node-red-configmap
