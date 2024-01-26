@@ -97,7 +97,7 @@ helmCharts:
                 tag: latest
               securityContext:
                 runAsUser: 0
-              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && chown 1000:1000 /dev/serial/by-id/usb*" ]
+              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb*" ]
               resources:
                 limits:
                   cpu: 5m
