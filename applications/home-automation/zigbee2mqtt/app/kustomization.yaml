@@ -135,4 +135,4 @@ helmCharts:
           enabled: true
           type: hostPath
           hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-          hostPathType: BlockDevice
+#          hostPathType: BlockDevice
