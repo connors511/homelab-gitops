@@ -30,6 +30,7 @@ helmCharts:
             main:
               securityContext:
                 runAsUser: 0
+              command: ["sh","-c","ls -al /dev/serial/by-id && echo $UID && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure && sleep 1d"]
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
                 tag: 1.35.1
