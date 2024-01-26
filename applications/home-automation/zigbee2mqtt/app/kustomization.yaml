@@ -160,7 +160,7 @@ helmCharts:
           #          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
           #          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
           hostPath: /dev/ttyACM0
-          hostPathType: CharDevice
+#          hostPathType: CharDevice
 #          defaultMode: 511 # 0700
 
         udev:
