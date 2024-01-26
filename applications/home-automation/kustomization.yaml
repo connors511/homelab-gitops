@@ -1,0 +1,5 @@
+namespace: home-automation
+
+resources:
+  - ./namespace.yaml
+  - ./zigbee2mqtt
