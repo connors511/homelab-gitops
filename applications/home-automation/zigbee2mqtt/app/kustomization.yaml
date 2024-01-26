@@ -21,9 +21,9 @@ helmCharts:
           pod:
             securityContext:
               privileged: true
-              runAsUser: 0
-              runAsGroup: 0
-              fsGroup: 0
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
               fsGroupChangePolicy: OnRootMismatch
 
           containers:
@@ -79,7 +79,7 @@ helmCharts:
                       key: mqtt_password
 #                ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
-#                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
+                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 460800
 #                ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: false
               resources:
@@ -89,6 +89,19 @@ helmCharts:
                 limits:
                   memory: 256M
 
+          initContainers:
+            usb-permission:
+              name: usb-perm
+              image:
+                repository: busybox
+                tag: latest
+              securityContext:
+                runAsUser: 0
+              command: [ "sh","-c","ls -al /dev/serial/by-id && chown 1000:1000 /dev/by/serial-id/usb*" ]
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 128Mi
 
           affinity:
             nodeAffinity:
@@ -136,7 +149,7 @@ helmCharts:
           enabled: true
           type: hostPath
 #          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-#          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
-          hostPath: /dev/ttyACM0
+          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
+#          hostPath: /dev/ttyACM0
           hostPathType: CharDevice
-          defaultMode: 511 # 0700
+#          defaultMode: 511 # 0700
