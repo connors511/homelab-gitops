@@ -52,10 +52,8 @@ helmCharts:
 
           containers:
             main:
-              securityContext:
-                runAsUser: 0
-#              command: ["sh","-c","ls -al /dev/serial/by-id && echo $UID && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure && node index.js"]
-              command: ["sh","-c","ls -al /dev && whoami && test -w /dev/ttyACM0 && echo success || echo failure && node index.js"]
+#              securityContext:
+#                runAsUser: 0
               image:
                 repository: ghcr.io/koenkk/zigbee2mqtt
                 tag: 1.35.1
@@ -92,7 +90,6 @@ helmCharts:
                 ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
                 ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
                 ZIGBEE2MQTT_CONFIG_FRONTEND: "false"
-#                ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: "8080"
                 ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.mlad.dk
                 ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: "true"
                 ZIGBEE2MQTT_CONFIG_MQTT_BASE_TOPIC: zigbee2mqtt
@@ -111,34 +108,16 @@ helmCharts:
                     secretKeyRef:
                       name: zigbee2mqtt-secret
                       key: mqtt_password
-#                ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
-                DEBUG: zigbee-herdsman*
+                ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
                 ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
                 ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "tcp://ser2sock:10000"
-#                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 460800
-#                ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: false
               resources:
                 requests:
                   cpu: 8m
                   memory: 212M
                 limits:
                   memory: 256M
-
-#          initContainers:
-#            usb-permission:
-#              name: usb-perm
-#              image:
-#                repository: busybox
-#                tag: latest
-#              securityContext:
-#                runAsUser: 0
-#              command: [ "sh","-c","ls -al /dev/serial/by-id && chmod 777 /dev/serial/by-id/usb* && ls -al /dev/serial/by-id && chown 1000:1000 /dev/serial/by-id/usb* && test -w /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00 && echo success || echo failure" ]
-##              command: [ "sh","-c","ls -al /dev && chmod 777 /dev/ttyACM0 && ls -al /dev/ttyACM0 && chown 1000:1000 /dev/ttyACM0 && test -w /dev/ttyACM0 && echo success || echo failure" ]
-#              resources:
-#                limits:
-#                  cpu: 5m
-#                  memory: 10Mi
 
           affinity:
             nodeAffinity:
@@ -182,24 +161,3 @@ helmCharts:
             main:
               main:
                 - path: /data
-
-#        usb:
-#          enabled: true
-#          type: hostPath
-##          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-#          advancedMounts:
-#            main:
-#              main:
-#                - path: /dev/ttyACM0
-#          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
-##          hostPath: /dev/ttyACM0
-##          hostPathType: CharDevice
-##          defaultMode: 511 # 0700
-
-        udev:
-          enabled: true
-          type: hostPath
-          #          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-          #          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
-          hostPath: /run/udev
-          readOnly: true
