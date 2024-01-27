@@ -31,6 +31,7 @@ helmCharts:
         pass-access-token:
         pass-user-headers:
         set-authorization-header:
+        set-xauthrequest:
         email-domain: "*"
         cookie-domain: .mlad.dk
         whitelist-domain: .mlad.dk
