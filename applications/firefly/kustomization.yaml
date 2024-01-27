@@ -31,9 +31,9 @@ helmCharts:
           MAIL_MAILER: log
           MAIL_FROM: changeme@example.com
           AUTHENTICATION_GUARD: 'remote_user_guard'
-          AUTHENTICATION_GUARD_HEADER: 'X-User'
-          AUTHENTICATION_GUARD_EMAIL: 'X-Email'
-        #          TRUSTED_PROXIES: '**'
+          AUTHENTICATION_GUARD_HEADER: 'X-Email'
+#          AUTHENTICATION_GUARD_EMAIL: 'X-Email'
+          TRUSTED_PROXIES: '**'
         existingSecret: firefly-secret
       cronjob:
         enabled: true
