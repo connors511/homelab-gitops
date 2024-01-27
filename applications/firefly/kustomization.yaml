@@ -110,7 +110,7 @@ helmCharts:
           enabled: true
           className: "nginx"
           annotations:
-            nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+            nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth?allowed_groups=matthias-budget"
             nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
           hosts:
             - host: budget-matthias.mlad.dk
