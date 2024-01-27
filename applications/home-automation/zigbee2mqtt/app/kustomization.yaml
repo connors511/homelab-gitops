@@ -107,7 +107,7 @@ helmCharts:
                       key: mqtt_password
 #                ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
                 DEBUG: zigbee-herdsman*
-#                ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
+                ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
                 ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "tcp://ser2sock:10000"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00"
 #                ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 460800
