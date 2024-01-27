@@ -16,6 +16,9 @@ helmCharts:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             auth_request_set $token $upstream_http_authorization;
             proxy_set_header Authorization $token;
+            
+            auth_request_set $user  $upstream_http_x_auth_request_user;
+            proxy_set_header X-User  $user;
         pathType: Prefix
         hosts:
           - host: whoami.mlad.dk
