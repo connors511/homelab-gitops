@@ -29,11 +29,11 @@ helmCharts:
           MAIL_MAILER: log
           MAIL_FROM: changeme@example.com
         #          TRUSTED_PROXIES: '**'
-        existingSecret: firefly-env-secret
+        existingSecret: firefly-secret
       cronjob:
         enabled: true
         auth:
-          existingSecret: firefly-cron-secret
+          existingSecret: firefly-secret
           secretKey: "STATIC_CRON_TOKEN"
       ingress:
         enabled: true

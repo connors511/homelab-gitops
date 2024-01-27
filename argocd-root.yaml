@@ -75,6 +75,7 @@ spec:
       name: "{{path.basename}}"
     spec:
       project: applications
+      revisionHistoryLimit: 3
       syncPolicy:
         automated:
           allowEmpty: true
