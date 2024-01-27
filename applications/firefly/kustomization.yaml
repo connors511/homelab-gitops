@@ -86,7 +86,7 @@ helmCharts:
                     secretKeyRef:
                       name: firefly-importer-secret
                       key: matthias_access_token
-                FIREFLY_III_URL: "http://firefly-iii.firefly:8080"
+                FIREFLY_III_URL: "http://firefly-iii.firefly.svc.local.homelab.mlad.dk:8080"
                 VANITY_URL: "https://budget.mlad.dk"
                 TRUSTED_PROXIES: "**"
               resources:
