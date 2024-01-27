@@ -3,19 +3,4 @@ namespace: kubernetes-dashboard
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
   - ./ingress.yaml
-  - ./proxy.yaml
   - ./rbac.yaml
-
-generators:
-  - |
-    apiVersion: viaduct.ai/v1
-    kind: ksops
-    metadata:
-      # Specify a name
-      name: oidc-secret-generator
-      annotations:
-        config.kubernetes.io/function: |
-          exec:
-            path: ksops
-    files:
-      - ./oidc-secret.sops.yaml
