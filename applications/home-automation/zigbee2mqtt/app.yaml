@@ -9,6 +9,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   project: applications
+  revisionHistoryLimit: 3
   source:
     path: applications/home-automation/zigbee2mqtt/app
     repoURL: https://github.com/connors511/homelab-gitops.git
