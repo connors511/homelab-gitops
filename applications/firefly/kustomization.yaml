@@ -3,8 +3,8 @@ namespace: firefly
 resources:
   - ./namespace.yaml
 
-generators:
-  - ./secret-generator.yaml
+#generators:
+#  - ./secret-generator.yaml
 
 helmCharts:
   - name: firefly-iii
@@ -34,6 +34,7 @@ helmCharts:
         enabled: true
         auth:
           existingSecret: firefly-cron-secret
+          secretKey: "STATIC_CRON_TOKEN"
       ingress:
         enabled: true
         className: nginx
@@ -42,7 +43,7 @@ helmCharts:
 
   - name: importer
     repo: https://firefly-iii.github.io/kubernetes/
-    releaseName: firefly-iii-importer
+    releaseName: firefly-iii-importer-matthias
     version: 1.3.1
     namespace: firefly
     valuesInline:
@@ -63,5 +64,5 @@ helmCharts:
         enabled: true
         className: nginx
         hosts:
-          - budget-importer.mlad.dk
+          - matthias.budget.mlad.dk
 
