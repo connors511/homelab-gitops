@@ -43,37 +43,106 @@ helmCharts:
         hosts:
           - budget.mlad.dk
 
-  - name: importer
-    repo: https://firefly-iii.github.io/kubernetes/
+#  - name: importer
+#    repo: https://firefly-iii.github.io/kubernetes/
+#    releaseName: firefly-iii-importer-matthias
+#    version: 1.3.1
+#    namespace: firefly
+#    valuesInline:
+#      service:
+#        port: 8080
+#      config:
+#        env:
+#          IGNORE_DUPLICATE_ERRORS: "false"
+#          TZ: "Europe/Copenhagen"
+#          FIREFLY_III_CLIENT_ID:
+#            valueFrom:
+#              secretKeyRef:
+#                name: firefly-importer-secret
+#                key: matthias_client_id
+#          FIREFLY_III_ACCESS_TOKEN:
+#            valueFrom:
+#              secretKeyRef:
+#                name: firefly-importer-secret
+#                key: matthias_access_token
+#        files: {}
+#      fireflyiii:
+#        url: "http://firefly-iii:8080"
+#        vanityUrl: "https://budget.mlad.dk"
+##        auth:
+##          existingSecret: firefly-import-secret
+#      ingress:
+#        enabled: true
+#        className: nginx
+#        hosts:
+#          - budget-matthias.mlad.dk
+
+  - name: app-template
+    repo: https://bjw-s.github.io/helm-charts/
     releaseName: firefly-iii-importer-matthias
-    version: 1.3.1
+    version: 2.5.0
     namespace: firefly
     valuesInline:
+      controllers:
+        main:
+          annotations:
+            reloader.stakater.com/auto: "true"
+
+          pod:
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: OnRootMismatch
+
+          containers:
+            main:
+              #              securityContext:
+              #                runAsUser: 0
+              image:
+                repository: fireflyiii/data-importer
+                tag: "version-0.8.0"
+              env:
+                IGNORE_DUPLICATE_ERRORS: "false"
+                TZ: "Europe/Copenhagen"
+                FIREFLY_III_CLIENT_ID:
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-importer-secret
+                      key: matthias_client_id
+                FIREFLY_III_ACCESS_TOKEN:
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-importer-secret
+                      key: matthias_access_token
+                FIREFLY_III_URL: "http://firefly-iii:8080"
+                VANITY_URL: "https://budget.mlad.dk"
+                TRUSTED_PROXIES: "**"
+              resources:
+                requests:
+                  cpu: 8m
+                  memory: 212M
+                limits:
+                  memory: 256M
+
       service:
-        port: 8080
-      config:
-        env:
-          IGNORE_DUPLICATE_ERRORS: "false"
-          TZ: "Europe/Copenhagen"
-          FIREFLY_III_CLIENT_ID:
-            valueFrom:
-              secretKeyRef:
-                name: firefly-importer-secret
-                key: matthias_client_id
-          FIREFLY_III_ACCESS_TOKEN:
-            valueFrom:
-              secretKeyRef:
-                name: firefly-importer-secret
-                key: matthias_access_token
-        files: {}
-      fireflyiii:
-        url: "http://firefly-iii:8080"
-        vanityUrl: "https://budget.mlad.dk"
-#        auth:
-#          existingSecret: firefly-import-secret
+        main:
+          ports:
+            http:
+              port: 8080
+
       ingress:
-        enabled: true
-        className: nginx
-        hosts:
-          - budget-matthias.mlad.dk
+        main:
+          enabled: true
+          className: "nginx"
+          annotations:
+            nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+            nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
+          hosts:
+            - host: budget-matthias.mlad.dk
+              paths:
+                - path: /
+                  service:
+                    name: main
+                    port: http
 
