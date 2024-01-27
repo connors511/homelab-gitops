@@ -7,6 +7,27 @@ resources:
 #  - ./secret-generator.yaml
 
 helmCharts:
+  - name: ser2sock
+    repo: https://k8s-at-home.com/charts/
+    releaseName: ser2sock
+    namespace: home-automation
+    valuesInline:
+      securityContext:
+        privileged: true
+      persistence:
+        usb:
+          enabled: true
+          type: hostPath
+          mountPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: sonoff.tech/zigbee-dongle-plus-e
+                    operator: In
+                    values:
+                      - "true"
   - name: app-template
     repo: https://bjw-s.github.io/helm-charts/
     releaseName: zigbee2mqtt
@@ -154,18 +175,18 @@ helmCharts:
               main:
                 - path: /data
 
-        usb:
-          enabled: true
-          type: hostPath
-#          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
-          advancedMounts:
-            main:
-              main:
-                - path: /dev/ttyACM0
-          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
-#          hostPath: /dev/ttyACM0
-#          hostPathType: CharDevice
-#          defaultMode: 511 # 0700
+#        usb:
+#          enabled: true
+#          type: hostPath
+##          hostPath: /dev/serial/by-id/usb-1a86_55d4-if00
+#          advancedMounts:
+#            main:
+#              main:
+#                - path: /dev/ttyACM0
+#          hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231008143900-if00
+##          hostPath: /dev/ttyACM0
+##          hostPathType: CharDevice
+##          defaultMode: 511 # 0700
 
         udev:
           enabled: true
