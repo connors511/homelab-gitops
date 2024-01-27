@@ -77,7 +77,7 @@ helmCharts:
               #                runAsUser: 0
               image:
                 repository: fireflyiii/data-importer
-                tag: "version-0.8.0"
+                tag: "version-1.4.2"
               env:
                 IGNORE_DUPLICATE_ERRORS: "false"
                 TZ: "Europe/Copenhagen"
