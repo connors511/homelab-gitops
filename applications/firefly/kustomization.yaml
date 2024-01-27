@@ -65,5 +65,5 @@ helmCharts:
         enabled: true
         className: nginx
         hosts:
-          - matthias.budget.mlad.dk
+          - budget-matthias.mlad.dk
 
