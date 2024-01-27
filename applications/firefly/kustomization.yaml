@@ -2,6 +2,7 @@ namespace: firefly
 
 resources:
   - ./namespace.yaml
+  - ./externalsecret.yaml
 
 #generators:
 #  - ./secret-generator.yaml
