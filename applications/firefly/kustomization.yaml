@@ -15,6 +15,9 @@ helmCharts:
     version: 1.7.1
     namespace: firefly
     valuesInline:
+      image:
+        repository: "fireflyiii/core"
+        tag: version-6.1.7
       service:
         port: 8080
       config:
