@@ -42,9 +42,6 @@ helmCharts:
 
           pod:
             securityContext:
-              capabilities:
-                add: ["SYS_ADMIN"]
-              privileged: true
               runAsUser: 1000
               runAsGroup: 1000
               fsGroup: 1000
