@@ -116,16 +116,6 @@ helmCharts:
                 limits:
                   memory: 256M
 
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: sonoff.tech/zigbee-dongle-plus-e
-                        operator: In
-                        values:
-                          - "true"
-
       service:
         main:
           ports:
