@@ -99,7 +99,6 @@ helmCharts:
                     secretKeyRef:
                       name: firefly-importer-secret
                       key: NORDIGEN_KEY
-                NORDIGEN_SANDBOX: true
                 FIREFLY_III_URL: "http://firefly-iii:8080"
                 VANITY_URL: "https://budget.mlad.dk"
                 TRUSTED_PROXIES: "**"
