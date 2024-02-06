@@ -47,27 +47,6 @@ helmCharts:
                 limits:
                   memory: 1254M
 
-            vscode:
-              image:
-                repository: codercom/code-server
-                tag: 4.21.0
-              workingDir: "/config"
-              args:
-                - --user-data-dir
-                - "/config/.vscode"
-                - --auth
-                - "none"
-              env:
-                TZ: America/New_York
-                HASS_SERVER: http://home-assistant:8123
-              probes:
-                liveness:
-                  enabled: false
-                readiness:
-                  enabled: false
-                startup:
-                  enabled: false
-
           initContainers:
             git-clone:
               name: git-clone
@@ -85,6 +64,27 @@ helmCharts:
 #                volumeMounts:
 #                  - name: html
 #                    mountPath: /config
+
+        vscode:
+          image:
+            repository: codercom/code-server
+            tag: 4.21.0
+          workingDir: "/config"
+          args:
+            - --user-data-dir
+            - "/config/.vscode"
+            - --auth
+            - "none"
+          env:
+            TZ: America/New_York
+            HASS_SERVER: http://home-assistant:8123
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
 
       service:
         main:
