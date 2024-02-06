@@ -51,9 +51,9 @@ helmCharts:
             atesting:
               name: atesting
               image:
-                repository: alpine/git
+                repository: alpine
                 tag: latest
-              entrypoint: 'ls /config'
+              command: ['sh', '-c', 'ls /config']
 #            git-clone:
 #              name: git-clone
 #              image:
