@@ -47,6 +47,23 @@ helmCharts:
                 limits:
                   memory: 1254M
 
+              initContainers:
+              - name: git-clone
+                image: alpine/git
+                args:
+                  - clone
+                  - --single-branch
+                  - --
+                  - https://github.com/connors511/hass-config.git
+                  - /config
+#                securityContext:
+#                  runAsUser: 1
+#                  allowPrivilegeEscalation: false
+#                  readOnlyRootFilesystem: true
+#                volumeMounts:
+#                  - name: html
+#                    mountPath: /config
+
       service:
         main:
           ports:
