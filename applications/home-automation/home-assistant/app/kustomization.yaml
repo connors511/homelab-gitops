@@ -51,6 +51,7 @@ helmCharts:
           - name: git-clone
             image:
               repository: alpine/git
+              tag: latest
             args:
               - clone
               - --single-branch
