@@ -48,23 +48,17 @@ helmCharts:
                   memory: 1254M
 
           initContainers:
-            atesting:
-              name: atesting
+            git-clone:
+              name: git-clone
               image:
-                repository: alpine
+                repository: alpine/git
                 tag: latest
-              command: ['sh', '-c', 'ls /config']
-#            git-clone:
-#              name: git-clone
-#              image:
-#                repository: alpine/git
-#                tag: latest
-#              args:
-#                - clone
-#                - --single-branch
-#                - --
-#                - https://github.com/connors511/hass-config.git
-#                - /config
+              args:
+                - clone
+                - --single-branch
+                - --
+                - https://github.com/connors511/hass-config.git
+                - /config || true
 #                securityContext:
 #                  runAsUser: 1
 #                  allowPrivilegeEscalation: false
