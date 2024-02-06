@@ -47,6 +47,27 @@ helmCharts:
                 limits:
                   memory: 1254M
 
+            vscode:
+              image:
+                repository: codercom/code-server
+                tag: 4.21.0
+              workingDir: "/config"
+              args:
+                - --user-data-dir
+                - "/config/.vscode"
+                - --auth
+                - "none"
+              env:
+                TZ: America/New_York
+                HASS_SERVER: http://home-assistant:8123
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+
           initContainers:
             git-clone:
               name: git-clone
@@ -70,6 +91,10 @@ helmCharts:
           ports:
             http:
               port: 8123
+        vscode:
+          ports:
+            http:
+              port: 8080
 
       ingress:
         main:
@@ -80,6 +105,19 @@ helmCharts:
             nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
           hosts:
             - host: hass.mlad.dk
+              paths:
+                - path: /
+                  service:
+                    name: main
+                    port: http
+        vscode:
+          enabled: true
+          className: "nginx"
+          annotations:
+            nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+            nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
+          hosts:
+            - host: hass-code.mlad.dk
               paths:
                 - path: /
                   service:
