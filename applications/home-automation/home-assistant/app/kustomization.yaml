@@ -114,7 +114,7 @@ helmCharts:
                 - path: /
                   service:
                     name: main
-                    port: http
+                    port: vscode
 
       persistence:
         data:
