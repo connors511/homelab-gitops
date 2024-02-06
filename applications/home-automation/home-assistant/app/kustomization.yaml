@@ -53,12 +53,10 @@ helmCharts:
               image:
                 repository: alpine/git
                 tag: latest
-              args:
-                - clone
-                - --single-branch
-                - --
-                - https://github.com/connors511/hass-config.git
-                - /config || true
+              command:
+                - sh
+                - -c
+                - git clone --single-branch https://github.com/connors511/hass-config.git /config || true
 #                securityContext:
 #                  runAsUser: 1
 #                  allowPrivilegeEscalation: false
