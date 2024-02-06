@@ -49,7 +49,8 @@ helmCharts:
 
           initContainers:
           - name: git-clone
-            image: alpine/git
+            image:
+              repository: alpine/git
             args:
               - clone
               - --single-branch
