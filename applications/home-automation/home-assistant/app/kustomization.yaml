@@ -48,6 +48,12 @@ helmCharts:
                   memory: 1254M
 
           initContainers:
+            testing:
+              name: testing
+              image:
+                repository: alpine/git
+                tag: latest
+              entrypoint: 'ls /config'
             git-clone:
               name: git-clone
               image:
