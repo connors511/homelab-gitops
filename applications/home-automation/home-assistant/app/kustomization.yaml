@@ -1,0 +1,85 @@
+namespace: home-automation
+
+resources:
+  - ./externalsecret.yaml
+
+#generators:
+#  - ./secret-generator.yaml
+
+helmCharts:
+  - name: app-template
+    repo: https://bjw-s.github.io/helm-charts/
+    releaseName: zigbee2mqtt
+    version: 2.5.0
+    namespace: home-automation
+    valuesInline:
+      controllers:
+        main:
+          annotations:
+            reloader.stakater.com/auto: "true"
+
+          pod:
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              fsGroup: 1000
+              fsGroupChangePolicy: OnRootMismatch
+
+          containers:
+            main:
+              image:
+                repository: ghcr.io/home-assistant/home-assistant
+                tag: 2024.1.6
+              envFrom:
+                - secretRef:
+                    name: home-assistant-secret
+              probes:
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
+              resources:
+                requests:
+                  cpu: 47m
+                  memory: 1254M
+                limits:
+                  memory: 1254M
+
+      service:
+        main:
+          ports:
+            http:
+              port: 8123
+
+      ingress:
+        main:
+          enabled: true
+          className: "nginx"
+          annotations:
+            nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+            nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
+          hosts:
+            - host: hass.mlad.dk
+              paths:
+                - path: /
+                  service:
+                    name: main
+                    port: http
+
+      persistence:
+        data:
+          accessMode: ReadWriteOnce
+          size: "1Gi"
+          advancedMounts:
+            main:
+              main:
+                - path: /config
+        deploy-key:
+          type: secret
+          name: home-assistant-secret
+          defaultMode: 256
+          globalMounts:
+            - path: /root/.ssh/id_rsa
+              subPath: GH_DEPLOY_KEY

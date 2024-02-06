@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: applications
+  revisionHistoryLimit: 3
+  source:
+    path: applications/home-automation/home-assistant/app
+    repoURL: https://github.com/connors511/homelab-gitops.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true

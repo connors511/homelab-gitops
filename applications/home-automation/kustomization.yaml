@@ -3,3 +3,4 @@
 resources:
   - ./namespace.yaml
   - ./zigbee2mqtt/app.yaml
+  - ./home-assistant/app.yaml
