@@ -22,8 +22,8 @@ helmCharts:
               nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
             hosts:
               - hubble.mlad.dk
-        peerService:
-          clusterDomain: local.homelab.mlad.dk
+#        peerService:
+#          clusterDomain: local.homelab.mlad.dk
       kubeProxyReplacement: strict
       securityContext:
         capabilities:
@@ -47,5 +47,5 @@ helmCharts:
         autoMount:
           enabled: false
         hostRoot: /sys/fs/cgroup
-      k8sServiceHost: api.homelab.mlad.dk
+      k8sServiceHost: homelab.mlad.dk
       k8sServicePort: 6443
