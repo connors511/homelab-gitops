@@ -11,7 +11,7 @@ helmCharts:
     namespace: default
     includeCRDs: true
     valuesInline:
-      clusterDomain: local.homelab.mlad.dk
+      # clusterDomain: local.homelab.mlad.dk
       image:
         repository: emqx/emqx
       replicaCount: 3

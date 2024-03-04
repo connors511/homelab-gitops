@@ -22,8 +22,9 @@ helmCharts:
               nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
             hosts:
               - hubble.mlad.dk
-#        peerService:
+        peerService:
 #          clusterDomain: local.homelab.mlad.dk
+          clusterDomain: cluster.local
       kubeProxyReplacement: strict
       securityContext:
         capabilities:
