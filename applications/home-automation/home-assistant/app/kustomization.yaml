@@ -18,7 +18,7 @@ helmCharts:
           runAsUser: 1000
           runAsGroup: 1000
           fsGroup: 1000
-          fsGroupChangePolicy: OnRootMismatch
+          fsGroupChangePolicy: "Always"
 
       controllers:
         main:
@@ -121,6 +121,7 @@ helmCharts:
         data:
           accessMode: ReadWriteOnce
           size: "1Gi"
+          defaultMode: 256
           globalMounts:
             - path: /config
         deploy-key:
