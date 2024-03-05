@@ -40,7 +40,7 @@ helmCharts:
 #        type: redis
       redis:
         enabled: true
-        clusterDomain: homelab.mlad.dk
+#        clusterDomain: homelab.mlad.dk
       config:
         existingSecret: oauth2-proxy-secret
       affinity:
