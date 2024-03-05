@@ -1,6 +1,7 @@
 namespace: network
 
 resources:
+  - ./namespace.yaml
   - ./net-attach-iot.yaml
 
 helmCharts:
