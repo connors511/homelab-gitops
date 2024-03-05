@@ -24,13 +24,13 @@ helmCharts:
               runAsGroup: 1000
               fsGroup: 1000
               fsGroupChangePolicy: OnRootMismatch
-            annotations:
-              k8s.v1.cni.cncf.io/networks: |
-                [{
-                  "name":"multus-iot",
-                  "namespace": "network",
-                  "ips": ["192.168.1.50/24"]
-                }]
+#            annotations:
+#              k8s.v1.cni.cncf.io/networks: |
+#                [{
+#                  "name":"multus-iot",
+#                  "namespace": "network",
+#                  "ips": ["192.168.1.50/24"]
+#                }]
 
           containers:
             main:
