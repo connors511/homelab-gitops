@@ -13,17 +13,18 @@ helmCharts:
     version: 2.5.0
     namespace: home-automation
     valuesInline:
+      defaultPodOptions:
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          fsGroup: 1000
+          fsGroupChangePolicy: OnRootMismatch
+
       controllers:
         main:
           annotations:
             reloader.stakater.com/auto: "true"
 
-          pod:
-            securityContext:
-              runAsUser: 1000
-              runAsGroup: 1000
-              fsGroup: 1000
-              fsGroupChangePolicy: Always
 #            annotations:
 #              k8s.v1.cni.cncf.io/networks: |
 #                [{
