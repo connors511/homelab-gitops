@@ -1,4 +1,4 @@
-namespace: kube-system
+namespace: network
 
 resources:
   - ./net-attach-iot.yaml
@@ -8,7 +8,7 @@ helmCharts:
     releaseName: multus
     repo: https://angelnu.github.io/helm-charts
     version: 5.0.4
-    namespace: kube-system
+    namespace: network
     includeCRDs: true
     valuesInline:
       image:
