@@ -24,6 +24,13 @@ helmCharts:
               runAsGroup: 1000
               fsGroup: 1000
               fsGroupChangePolicy: OnRootMismatch
+            annotations:
+              k8s.v1.cni.cncf.io/networks: |
+                [{
+                  "name":"multus-iot",
+                  "namespace": "network",
+                  "ips": ["192.168.100.50/24"]
+                }]
 
           containers:
             main:
@@ -78,13 +85,6 @@ helmCharts:
                 - sh
                 - -c
                 - git clone --single-branch https://github.com/connors511/hass-config.git /config || true
-#                securityContext:
-#                  runAsUser: 1
-#                  allowPrivilegeEscalation: false
-#                  readOnlyRootFilesystem: true
-#                volumeMounts:
-#                  - name: html
-#                    mountPath: /config
 
 
       service:
