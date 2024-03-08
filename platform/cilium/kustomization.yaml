@@ -1,3 +1,11 @@
+resources:
+  - ./hubble-ingress.yaml
+  - github.com/cilium/kustomize-bases/jaeger
+  - ./jaeger.yaml
+  - ./jaeger-ingress.yaml
+  - github.com/cilium/kustomize-bases/opentelemetry
+  - ./otel.yaml
+
 helmCharts:
   - name: cilium
     repo: https://helm.cilium.io/
@@ -11,6 +19,8 @@ helmCharts:
       hostFirewall:
         enabled: true
       hubble:
+        metrics:
+          enabled: "{dns,drop,tcp,flow,icmp,http}"
         relay:
           enabled: true
         ui:
@@ -20,6 +30,8 @@ helmCharts:
               kubernetes.io/ingress.class: "nginx"
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
               nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+              nginx.ingress.kubernetes.io/auth-url: "https://auth.mlad.dk/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: https://auth.mlad.dk/oauth2/start
             hosts:
               - hubble.mlad.dk
         peerService:
@@ -50,3 +62,5 @@ helmCharts:
         hostRoot: /sys/fs/cgroup
       k8sServiceHost: homelab.mlad.dk
       k8sServicePort: 6443
+      ingressController:
+        enabled: true
