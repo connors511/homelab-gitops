@@ -3,8 +3,8 @@ resources:
   - github.com/cilium/kustomize-bases/jaeger
   - ./jaeger.yaml
   - ./jaeger-ingress.yaml
-  - github.com/cilium/kustomize-bases/opentelemetry
-  - ./otel.yaml
+#  - github.com/cilium/kustomize-bases/opentelemetry
+#  - ./otel.yaml
 
 helmCharts:
   - name: cilium

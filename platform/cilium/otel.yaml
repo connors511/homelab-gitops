@@ -10,30 +10,30 @@ spec:
     # set NODE_IP environment variable using downwards API
     - name: NODE_IP
       valueFrom:
-  fieldRef:
-    fieldPath: status.hostIP
-    volumes:
-      # this example connect to Hubble socket of Cilium agent
-      # using host port and TLS
-      - name: hubble-tls
-        projected:
-  defaultMode: 256
-  sources:
-    - secret:
-        name: hubble-relay-client-certs
-        items:
-    - key: tls.crt
-      path: client.crt
-    - key: tls.key
-      path: client.key
-    - key: ca.crt
-      path: ca.crt
-      # it's possible to use the UNIX socket also, for which
-      # the following volume will be needed
-      # - name: cilium-run
-      #   hostPath:
-      #     path: /var/run/cilium
-      #     type: Directory
+        fieldRef:
+          fieldPath: status.hostIP
+  volumes:
+    # this example connect to Hubble socket of Cilium agent
+    # using host port and TLS
+    - name: hubble-tls
+      projected:
+        defaultMode: 256
+        sources:
+          - secret:
+              name: hubble-relay-client-certs
+              items:
+                - key: tls.crt
+                  path: client.crt
+                - key: tls.key
+                  path: client.key
+                - key: ca.crt
+                  path: ca.crt
+    # it's possible to use the UNIX socket also, for which
+    # the following volume will be needed
+    # - name: cilium-run
+    #   hostPath:
+    #     path: /var/run/cilium
+    #     type: Directory
   volumeMounts:
     # - name: cilium-run
     #   mountPath: /var/run/cilium
