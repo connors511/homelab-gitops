@@ -3,6 +3,7 @@ rules:
   - id: remove-old-jobs
     resources:
       - jobs
+    jmespath: ''
     ttl: 2d
   # Delete pods in development namespaces that are not in Running state (Failed, Completed).
   - id: remove-non-running-pods
