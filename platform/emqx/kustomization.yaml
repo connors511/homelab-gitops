@@ -17,8 +17,9 @@ helmCharts:
       replicaCount: 3
       recreatePods: true
       envFromSecret: emqx-secret
-      service:
-        type: NodePort
+#        service:
+#          type: LoadBalancer
+#          loadBalancerIP: 10.0.6.50
       tolerations:
         - key: "arm"
           operator: "Exists"
