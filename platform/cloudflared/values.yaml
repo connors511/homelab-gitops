@@ -7,7 +7,7 @@ config: |
   no-autoupdate: true
   ingress:
     - hostname: emqxtcp.mlad.dk
-      service: tcp://emqx-headless.default.svc.cluster.local:1883
+      service: tcp://emqx.default.svc.cluster.local:1883
       originRequest:
         noTLSVerify: true
     - service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
