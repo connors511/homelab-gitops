@@ -1,3 +1,5 @@
+namespace: kube-janitor
+
 resources:
   - namespace.yaml
   - deployment.yaml
