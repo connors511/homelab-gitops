@@ -98,7 +98,7 @@ spec:
     gracePeriod: 600
   haproxy:
     enabled: true
-    size: 3
+    size: 2
     image: percona/percona-xtradb-cluster-operator:1.13.0-haproxy
     resources:
       requests:
