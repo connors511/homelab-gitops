@@ -1,0 +1,10 @@
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - rbac.yaml
+
+configMapGenerator:
+  - name: kube-janitor
+    behavior: create
+    files:
+      - rules.yaml

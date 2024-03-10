@@ -1,0 +1,36 @@
+rules:
+  # Delete Jobs after after 2 days.
+  - id: remove-old-jobs
+    resources:
+      - jobs
+    ttl: 2d
+  # Delete pods in development namespaces that are not in Running state (Failed, Completed).
+  - id: remove-non-running-pods
+    resources:
+      - pods
+    jmespath: "(status.phase == 'Completed' || status.phase == 'Failed') && metadata.namespace == 'development'"
+    ttl: 2h
+  # Delete pods in any namespace namespaces that are not in Running state (Failed, Completed).
+  - id: remove-non-running-pods
+    resources:
+      - pods
+    jmespath: "(status.phase == 'Completed' || status.phase == 'Failed')"
+    ttl: 3d
+  # delete all PVCs which are not mounted and not referenced by StatefulSets
+  - id: remove-unused-pvcs
+    resources:
+      - persistentvolumeclaims
+    jmespath: "_context.pvc_is_not_mounted && _context.pvc_is_not_referenced"
+    ttl: 4d
+  # Delete all Deployments with name starting with 'test-'
+  - id: remove-test-deployments
+    resources:
+      - deployments
+    jmespath: "starts_with(metadata.name, 'test-')"
+    ttl: 1d
+  # Delete all resources in playground namespace after 1 week
+  - id: remove-test-deployments
+    resources:
+      - "*"
+    jmespath: "metadata.namespace == 'playground'"
+    ttl: 7d
