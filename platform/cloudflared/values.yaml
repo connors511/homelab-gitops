@@ -6,10 +6,10 @@ config: |
   metrics: 0.0.0.0:2000
   no-autoupdate: true
   ingress:
-    - service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
-      originRequest:
-        noTLSVerify: true
     - hostname: https://emqxtcp.mlad.dk
       service: https://emqx-headless.default.svc.cluster.local:1883
+      originRequest:
+        noTLSVerify: true
+    - service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443
       originRequest:
         noTLSVerify: true
