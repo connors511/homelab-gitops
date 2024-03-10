@@ -71,8 +71,8 @@ spec:
     #    envVarsSecret: my-env-var-secrets
     resources:
       requests:
-        memory: 1G
-        cpu: 600m
+        memory: 512M
+        cpu: 128m
     #        ephemeral-storage: 1G
     #      limits:
     #        memory: 1G
@@ -102,8 +102,8 @@ spec:
     image: percona/percona-xtradb-cluster-operator:1.13.0-haproxy
     resources:
       requests:
-        memory: 1G
-        cpu: 600m
+        memory: 128M
+        cpu: 128m
     #      limits:
     #        memory: 1G
     #        cpu: 700m
@@ -137,7 +137,7 @@ spec:
     resources:
       requests:
         memory: 100M
-        cpu: 200m
+        cpu: 50m
   pmm:
     enabled: false
     image: percona/pmm-client:2.38.0
