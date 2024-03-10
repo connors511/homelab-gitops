@@ -25,7 +25,7 @@ spec:
             # dry run by default, remove to perform clean up
 #            - --dry-run
             # comment out to have less verbose logging
-#            - --debug
+            - --debug
             # run every minute
             - --interval=60
             - --rules-file=/config/rules.yaml
